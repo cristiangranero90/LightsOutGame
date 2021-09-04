@@ -3,14 +3,10 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
+import javax.swing.UIManager;
 import model.LightsOutGame;
 
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
-import javax.swing.JButton;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Color;
 
 public class GameBoard {
@@ -23,6 +19,16 @@ public class GameBoard {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				//look and feel
+				try {
+					UIManager.setLookAndFeel ( UIManager.getSystemLookAndFeelClassName () );
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					System.out.println("Error while look and feel is setting up");
+					e1.printStackTrace();
+				} 
+				
+				
 				try {
 					GameBoard window = new GameBoard();
 					window.frame.setVisible(true);
