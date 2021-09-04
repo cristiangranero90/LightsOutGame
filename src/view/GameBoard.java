@@ -4,6 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import model.LightsOutGame;
+
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Color;
+
 public class GameBoard {
 
 	private JFrame frame;
@@ -36,8 +45,17 @@ public class GameBoard {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.getContentPane().setBackground(new Color(238, 238, 238));
+		//frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		GridBagLayout gridBagLayout = new GridBagLayout();		
+		frame.getContentPane().setLayout(gridBagLayout);
+		//Prueba
+		LightsOutGame board = new LightsOutGame(5);
+		
+		presenter.BoardCreator.boardDimension(board, frame, gridBagLayout);
+		
 	}
 
 }

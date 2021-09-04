@@ -57,6 +57,9 @@ public class LightsOutGame {
 	public void oneMovement() {
 		setMovements(getMovements()+1);
 	}
+	public int boardSize() {
+		return getBoard().length;
+	}
 	
 	//Privates methods and simple checks
 	
