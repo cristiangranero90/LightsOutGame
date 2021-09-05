@@ -13,22 +13,32 @@ public class LightsOutGame {
 	}
 	
 	public void generateLights(int row, int column) {
-
-		if(!checkNumbers(row, column)) {
-			addLight(row, column);
-		}
-		if(!checkNumbers(row-1, column)) {
-			addLight(row-1, column);
-		}
-		if(!checkNumbers(row+1, column)) {
-			addLight(row+1, column);
-		}
-		if(!checkNumbers(row, column+1)) {
-			addLight(row, column+1);
-		}
-		if(!checkNumbers(row, column-1)) {
-			addLight(row, column-1);
-		}		
+		int rowUse = row;
+		int columnUse = column; 
+		
+		addLight(row, column);
+		//System.out.println(row + "+" + column);
+		
+		addLight(row-1, column);
+		//System.out.println(row + "+" + column);
+		row = rowUse;
+		column = columnUse;
+		
+		addLight(row+1, column);
+		//System.out.println(row + "+" + column);
+		row = rowUse;
+		column = columnUse;
+		
+		addLight(row, column+1);
+		//System.out.println(row + "+" + column);
+		row = rowUse;
+		column = columnUse;
+		
+		addLight(row, column-1);
+		//System.out.println(row + "+" + column);
+		row = rowUse;
+		column = columnUse;
+				
 	}
 	
 	public void removeLights(int row, int column) {
@@ -57,7 +67,7 @@ public class LightsOutGame {
 	public void oneMovement() {
 		setMovements(getMovements()+1);
 	}
-	public int boardSize() {
+	public int getBoardSize() {
 		return getBoard().length;
 	}
 	
@@ -71,10 +81,13 @@ public class LightsOutGame {
 	}
 
 	private void addLight(int row, int column) {
-		if (giveMeLight(row,column)) {
-			getBoard()[row][column] = false;
+		if (!checkNumbers(row, column)) {
+			if (giveMeLight(row,column)) {
+				getBoard()[row][column] = false;
+			}
+			getBoard()[row][column] = true;			
 		}
-		getBoard()[row][column] = true;
+		
 	}
 
 	private boolean checkNumbers(int numberOne, int numberTwo) {		
