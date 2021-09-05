@@ -21,6 +21,7 @@ public class BoardTools {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.setLocationRelativeTo(null);
 		panel.setLayout(grid);
+		//panel.setB
 		frame.getContentPane().add(panel);
 		
 	}
@@ -32,13 +33,13 @@ public class BoardTools {
 				if(board.giveMeLight(i, j)) {
 					Lights light = new Lights(true, i , j);
 					//button.setBounds(i, j, 30, 30);
-					grid.addLayoutComponent("", light.getButton());
+					//grid.addLayoutComponent("", light.getButton());
 					panel.add(light.getButton());
 				}
 				else {
 					Lights light = new Lights(false, i, j);				
 					panel.add(light.getButton());
-					grid.addLayoutComponent("", light.getButton());
+					//grid.addLayoutComponent("", light.getButton());
 				}
 				
 			}
@@ -63,9 +64,9 @@ public class BoardTools {
 		}
 	}
 
-	public static GridLayout setGridSize(GridLayout grid2, LightsOutGame board) {
-		// TODO Auto-generated method stub
-		return new GridLayout(board.getBoardSize(), board.getBoardSize(), 10, 10);
+	public static GridLayout setGridSize(GridLayout grid2, LightsOutGame board, Panel panel) {
+		
+		return new GridLayout(board.getBoardSize(), board.getBoardSize(), 5, 5);
 		
 	}
 

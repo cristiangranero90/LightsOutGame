@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Panel;
 
 public class GameBoard {
@@ -49,25 +50,33 @@ public class GameBoard {
 	 */
 	private void initialize() {
 		board = new LightsOutGame(6);
-		board.generateLights(4, 3);
+		board.generateLights(5, 5);
 		//grid = new GridLayout();		
 		frame = new JFrame();
-		
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Panel panel = new Panel();
-	    frame.getContentPane().add(panel, BorderLayout.CENTER);
 		
-		grid = BoardTools.setGridSize(grid, board);
-		BoardTools.initializeFrame(frame, grid, panel);
-		BoardTools.boardDimension(frame, board);
-		
+		//frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+	    
+	    //Set panel
+	    panel.setBounds(100, 600, 400, 400);
+	    panel.setPreferredSize(new Dimension(200, 200));
+	    
+		//Board Tools
+		grid = BoardTools.setGridSize(grid, board, panel);		
+		BoardTools.boardDimension(frame, board);		
 		BoardTools.addLights(frame, board, grid, panel);
+		BoardTools.initializeFrame(frame, grid, panel);
+		
+		//Adding layouts
+		frame.getContentPane().add(panel);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	    lblNewLabel.setBounds(129, 11, 679, 57);
+	    //lblNewLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+	    //lblNewLabel.setBounds(129, 11, 679, 57);
+		lblNewLabel.setLocation(20, 20);
+		lblNewLabel.setSize(20,460);
 	    //frame.getContentPane().add(lblNewLabel);
 	    
 	    
