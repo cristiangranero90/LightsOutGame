@@ -1,7 +1,10 @@
 package presenter;
 
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
 
@@ -19,8 +22,10 @@ public class BoardTools {
 		//frame.setVisible(true);
 		//frame.getContentPane().setLayout(grid);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		frame.setLocationRelativeTo(null);
+		
 		panel.setLayout(grid);
+		frame.setLayout(null);
+		frame.setTitle("Lights out, the game");
 		//panel.setB
 		frame.getContentPane().add(panel);
 		

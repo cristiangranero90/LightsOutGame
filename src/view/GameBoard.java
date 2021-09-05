@@ -50,7 +50,7 @@ public class GameBoard {
 	 */
 	private void initialize() {
 		board = new LightsOutGame(6);
-		board.generateLights(5, 5);
+		board.generateLights(1, 1);
 		//grid = new GridLayout();		
 		frame = new JFrame();
 		Panel panel = new Panel();
@@ -59,8 +59,8 @@ public class GameBoard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 	    
 	    //Set panel
-	    panel.setBounds(100, 600, 400, 400);
-	    panel.setPreferredSize(new Dimension(200, 200));
+	    
+	    //panel.setPreferredSize(new Dimension(200, 200));
 	    
 		//Board Tools
 		grid = BoardTools.setGridSize(grid, board, panel);		
@@ -68,16 +68,18 @@ public class GameBoard {
 		BoardTools.addLights(frame, board, grid, panel);
 		BoardTools.initializeFrame(frame, grid, panel);
 		
+		panel.setBounds(10, 100, 500, 500);
+		
 		//Adding layouts
 		frame.getContentPane().add(panel);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	    //lblNewLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-	    //lblNewLabel.setBounds(129, 11, 679, 57);
-		lblNewLabel.setLocation(20, 20);
-		lblNewLabel.setSize(20,460);
-	    //frame.getContentPane().add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Rare Label ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel.setBounds(100, 11, 300, 57);
+		//lblNewLabel.setLocation(20, 600);
+		//lblNewLabel.setSize(10,10);
+		frame.getContentPane().add(lblNewLabel);
 	    
 	    
 		//frame.getContentPane().add(lblNewLabel, grid.a);
