@@ -1,15 +1,11 @@
 package presenter;
 
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
+
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
-
 import javax.swing.JFrame;
-
 import model.LightsOutGame;
 import view.Lights;
 
