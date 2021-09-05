@@ -22,7 +22,7 @@ public class Lights {
 		setStatus(status);
 		setPositionX(posX);
 		setPositionY(posY);		
-		System.out.println(posX + "" + posY);
+		System.out.println("Row " + posX + "; Column " + posY);
 		setColor();
 	}
 	
