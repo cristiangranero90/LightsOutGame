@@ -44,18 +44,14 @@ public class GameBoard {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Basic
 		board = new LightsOutGame(6);
-		board.generateLights(1, 1);
-		//grid = new GridLayout();		
+		board.generateLights(1, 1);	
 		frame = new JFrame();
 		Panel panel = new Panel();
 		
 		//frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-	    
-	    //Set panel
-	    
-	    //panel.setPreferredSize(new Dimension(200, 200));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
 	    
 		//Board Tools
 		grid = BoardTools.setGridSize(grid, board, panel);		
@@ -63,9 +59,12 @@ public class GameBoard {
 		BoardTools.addLights(frame, board, grid, panel);
 		BoardTools.initializeFrame(frame, grid, panel);
 		
+		//Set panel	    
 		panel.setBounds(10, 100, 500, 500);
+		//panel.setPreferredSize(new Dimension(200, 200));
 		
 		//Adding layouts
+		
 		frame.getContentPane().add(panel);
 		
 		JLabel lblNewLabel = new JLabel("Rare Label ");
