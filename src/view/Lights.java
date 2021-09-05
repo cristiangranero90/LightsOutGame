@@ -23,8 +23,15 @@ public class Lights {
 		setPositionX(posX);
 		setPositionY(posY);		
 		System.out.println(posX + "" + posY);
-		if (isStatus()) {
-			button.setBackground(Color.ORANGE);
+		setColor();
+	}
+	
+	public void setColor() {
+		if(isStatus()) {
+			getButton().setBackground(Color.ORANGE);
+		}
+		else {
+			getButton().setBackground(Color.WHITE);
 		}
 	}
 
