@@ -55,15 +55,10 @@ public class BoardTools {
 	public static void boardDimension(JFrame frame, LightsOutGame board) {
 		
 		int size = board.getBoardSize();
+		System.out.println(size + "size");
 		
-		if (size == 4) {
-			frame.setBounds(100, 100, 800, 600);
-		}
-		if (size == 5) {
+		if (size >= 4) {
 			frame.setBounds(100, 100, 800, 700);
-		}
-		if (size == 6) {
-			frame.setBounds(100, 100, 900, 700);
 		}
 		else {
 			throw new RuntimeException("Error while is building the frame dimensions");

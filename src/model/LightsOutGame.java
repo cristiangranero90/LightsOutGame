@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 import presenter.Contract;
 
 public class LightsOutGame implements Contract.Model {
@@ -14,8 +16,10 @@ public class LightsOutGame implements Contract.Model {
 		board = new boolean[size][size];
 		setMovements(0);
 		setWinner(false);
+		random();
 	}
 	
+	//The best way for iterators
 	public void generateLights(int row, int column) {
 		if(!checkNumbers(row, column)) {
 			addLight(row, column);
@@ -34,7 +38,7 @@ public class LightsOutGame implements Contract.Model {
 		}		
 				
 	}
-		
+	//Returns the light boolean of the values specificated  
 	public boolean giveMeLight(int row, int column) {
 		checkNumbers(row, column);
 		return getBoard()[row][column];
@@ -47,7 +51,25 @@ public class LightsOutGame implements Contract.Model {
 		return getBoard().length;
 	}
 	
-	//Privates methods and simple checks
+	//Privates methods for a simple checks and others functions
+	
+	private void random() {
+		
+		Random ran = new Random();
+		for(int i = 0; i<getBoardSize()-3; i++) {
+			int posX = ran.nextInt(getBoard().length);
+			int posY = ran.nextInt(getBoard().length);
+			System.out.println(posX + "" + posY);
+			generateLights(posX, posY);
+		}
+		
+		
+		
+		
+		
+		
+		
+	}
 
 	private void addLight(int row, int column) {
 		checkNumbers(row, column);

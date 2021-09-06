@@ -45,8 +45,8 @@ public class GameBoard {
 	 */
 	private void initialize() {
 		//Basic
-		board = new LightsOutGame(6);
-		board.generateLights(1, 1);	
+		board = new LightsOutGame(7);
+		//board.generateLights(1, 1);	
 		frame = new JFrame();
 		Panel panel = new Panel();
 		
