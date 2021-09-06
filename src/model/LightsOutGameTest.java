@@ -14,7 +14,8 @@ public class LightsOutGameTest {
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void testLightsOutGameError() {
-		LightsOutGame game = new LightsOutGame(0);		
+		LightsOutGame game = new LightsOutGame(0);	
+		
 	}
 	
 	@Test (expected = IllegalArgumentException.class)

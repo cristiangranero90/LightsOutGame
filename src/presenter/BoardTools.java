@@ -12,6 +12,11 @@ import view.Lights;
 public class BoardTools {
 		
 	
+	public void onButtonClicked() {
+		
+	}
+	
+	
 	public static void initializeFrame(JFrame frame, GridLayout grid, Panel panel) {
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
 		frame.setResizable(false);	
