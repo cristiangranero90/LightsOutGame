@@ -1,15 +1,19 @@
 package model;
 
-public class LightsOutGame {
+import presenter.Contract;
+
+public class LightsOutGame implements Contract.Model {
 
 	private boolean board[][] ;
 	private int movements;
-	
+	private boolean winner;	
+
 	public LightsOutGame(int size) {
 		
 		checkSizeValue(size);
 		board = new boolean[size][size];
-		this.movements = 0;
+		setMovements(0);
+		setWinner(false);
 	}
 	
 	public void generateLights(int row, int column) {
@@ -30,25 +34,7 @@ public class LightsOutGame {
 		}		
 				
 	}
-	
-	public void removeLights(int row, int column) {
-		if(!checkNumbers(row, column)) {
-			removeLight(row, column);
-		}
-		if(!checkNumbers(row-1, column)) {
-			removeLight(row-1, column);
-		}
-		if(!checkNumbers(row+1, column)) {
-			removeLight(row+1, column);
-		}
-		if(!checkNumbers(row, column+1)) {
-			removeLight(row, column+1);
-		}
-		if(!checkNumbers(row, column-1)) {
-			removeLight(row, column-1);
-		}		
-	}
-	
+		
 	public boolean giveMeLight(int row, int column) {
 		checkNumbers(row, column);
 		return getBoard()[row][column];
@@ -62,14 +48,6 @@ public class LightsOutGame {
 	}
 	
 	//Privates methods and simple checks
-	
-	private void removeLight(int row, int column) {
-		checkNumbers(row, column);
-		if (!giveMeLight(row, column)) {
-			getBoard()[row][column] = true;
-		}
-		getBoard()[row][column] = false;
-	}
 
 	private void addLight(int row, int column) {
 		checkNumbers(row, column);
@@ -94,6 +72,14 @@ public class LightsOutGame {
 	}
 		
 	//Getters and Setters
+	
+	public boolean isWinner() {
+		return winner;
+	}
+
+	public void setWinner(boolean winner) {
+		this.winner = winner;
+	}
 
 	public boolean[][] getBoard() {
 		return board;
@@ -109,7 +95,7 @@ public class LightsOutGame {
 
 	public void setMovements(int movements) {
 		if (movements < 0) {
-			throw new RuntimeException("The value of movement cannot be less than zero. ");
+			throw new RuntimeException("The value of movements cannot be less than zero. ");
 		}
 		this.movements = movements;
 	}

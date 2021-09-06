@@ -37,21 +37,7 @@ public class LightsOutGameTest {
 		assertTrue(game.giveMeLight(0, 3));		
 	}
 
-	@Test
-	public void testRemoveLights() {
-		LightsOutGame game = new LightsOutGame(5);
-		game.generateLights(1, 3);
-		game.removeLights(1, 3);
-		assertFalse(game.giveMeLight(1, 3));
-	}
-	@Test 
-	public void testRemoveLightsOppositeCase() {
-		LightsOutGame game = new LightsOutGame(5);
-		game.generateLights(1, 3);
-		game.removeLights(1, 3);
-		assertFalse(game.giveMeLight(0, 3));
-		
-	}
+	
 
 	@Test
 	public void testOneMovement() {
