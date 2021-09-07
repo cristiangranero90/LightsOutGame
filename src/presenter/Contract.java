@@ -9,11 +9,14 @@ public interface Contract {
 		public void onButtonResetClicked();
 		public void updateGrid();	
 		public void changeLight(int posX, int posY, boolean status);
+		public void updateMovements(int movements);
+		
 	}
 	
 	interface Presenter{
 		public void onButtonLight(int posX, int posY);
-		public void updateMovements();
+		public void updateMovements(int movements);
+		public void oneMovement();
 		public void generateLights(int posX, int posY);
 		public int boardSize();
 		public boolean haveLight(int posX, int posY);

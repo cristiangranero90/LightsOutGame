@@ -22,14 +22,6 @@ public class MainPresenter implements Contract.Presenter{
 		
 	}
 
-	@Override
-	public void updateMovements() {
-		// TODO Auto-generated method stub
-		model.oneMovement();
-		
-	}
-
-
 	public void generateLights(int posX, int posY) {
 		// TODO Auto-generated method stub
 		model.generateLights(posX, posY);
@@ -57,6 +49,19 @@ public class MainPresenter implements Contract.Presenter{
 	public void updateLights(int posX, int posY, boolean status) {
 		// TODO Auto-generated method stub
 		view.changeLight(posX, posY, status);
+	}
+
+	@Override
+	public void updateMovements(int movements) {
+		// TODO Auto-generated method stub
+		view.updateMovements(movements);
+		
+	}
+
+	@Override
+	public void oneMovement() {
+		// TODO Auto-generated method stub
+		model.oneMovement();
 	}
 
 

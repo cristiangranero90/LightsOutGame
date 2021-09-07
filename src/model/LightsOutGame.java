@@ -23,7 +23,7 @@ public class LightsOutGame implements Contract.Model {
 	
 	//The best way for iterators
 	public void generateLights(int row, int column) {
-		//System.out.println(row + "  " + column);
+		
 		if(!checkNumbers(row, column)) {
 			addLight(row, column);			
 		}
@@ -49,6 +49,7 @@ public class LightsOutGame implements Contract.Model {
 	
 	public void oneMovement() {
 		setMovements(getMovements()+1);
+		presenter.updateMovements(getMovements());
 	}
 	public int getBoardSize() {
 		return getBoard().length;
@@ -62,7 +63,6 @@ public class LightsOutGame implements Contract.Model {
 		for(int i = 0; i<getBoardSize()-3; i++) {
 			int posX = ran.nextInt(getBoard().length);
 			int posY = ran.nextInt(getBoard().length);
-			//System.out.println(posX + "" + posY);
 			generateLights(posX, posY);
 		}		
 	}
