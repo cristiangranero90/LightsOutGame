@@ -20,7 +20,7 @@ public class Lights {
 	
 	
 	public Lights(boolean status, int posX, int posY, Contract.View view){
-		button = new JButton(status+"");
+		button = new JButton();
 		button.setBounds(posX, posY, 1, 1);
 		button.setPreferredSize(new Dimension(10,10));
 		setStatus(status);
