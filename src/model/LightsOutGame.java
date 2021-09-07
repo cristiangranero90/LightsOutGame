@@ -9,9 +9,11 @@ public class LightsOutGame implements Contract.Model {
 	private boolean board[][] ;
 	private int movements;
 	private boolean winner;	
+	private Contract.Presenter presenter;
 
-	public LightsOutGame(int size) {
+	public LightsOutGame(int size, Contract.Presenter presenter) {
 		
+		this.presenter = presenter;
 		checkSizeValue(size);
 		board = new boolean[size][size];
 		setMovements(0);
@@ -21,8 +23,9 @@ public class LightsOutGame implements Contract.Model {
 	
 	//The best way for iterators
 	public void generateLights(int row, int column) {
+		//System.out.println(row + "  " + column);
 		if(!checkNumbers(row, column)) {
-			addLight(row, column);
+			addLight(row, column);			
 		}
 		if(!checkNumbers(row-1, column)) {
 			addLight(row-1, column);
@@ -59,25 +62,22 @@ public class LightsOutGame implements Contract.Model {
 		for(int i = 0; i<getBoardSize()-3; i++) {
 			int posX = ran.nextInt(getBoard().length);
 			int posY = ran.nextInt(getBoard().length);
-			System.out.println(posX + "" + posY);
+			//System.out.println(posX + "" + posY);
 			generateLights(posX, posY);
-		}
-		
-		
-		
-		
-		
-		
-		
+		}		
 	}
 
 	private void addLight(int row, int column) {
-		checkNumbers(row, column);
+				
 		if (!checkNumbers(row, column)) {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
+				presenter.updateLights(row, column, false);
 			}
-			getBoard()[row][column] = true;			
+			else {
+				getBoard()[row][column] = true;
+				presenter.updateLights(row, column, true);
+			}			
 		}
 		
 	}
@@ -120,6 +120,12 @@ public class LightsOutGame implements Contract.Model {
 			throw new RuntimeException("The value of movements cannot be less than zero. ");
 		}
 		this.movements = movements;
+	}
+
+	@Override
+	public LightsOutGame getAll() {
+		// TODO Auto-generated method stub
+		return this;
 	}
 	
 }

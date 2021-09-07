@@ -9,65 +9,58 @@ import javax.swing.JFrame;
 import model.LightsOutGame;
 import view.Lights;
 
-public class BoardTools {
-		
-	
-	public void onButtonClicked() {
-		
-	}
-	
+public class BoardTools { //It has only statics methods	
 	
 	public static void initializeFrame(JFrame frame, GridLayout grid, Panel panel) {
+		
+		//Frame
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
 		frame.setResizable(false);	
-		//frame.setVisible(true);
-		//frame.getContentPane().setLayout(grid);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		
+		//Grid
 		panel.setLayout(grid);
+		
+		//Latest settings of the frame		
 		frame.setLayout(null);
 		frame.setTitle("Lights out, the game");
-		//panel.setB
 		frame.getContentPane().add(panel);
 		
 	}
 	
 
-	public static void addLights(JFrame frame, LightsOutGame board, GridLayout grid, Panel panel) {
-		for (int i = 0; i<board.getBoardSize(); i++){
-			for (int j = 0; j<board.getBoardSize(); j++) {
-				if(board.giveMeLight(i, j)) {
-					Lights light = new Lights(true, i , j);
-					//button.setBounds(i, j, 30, 30);
-					//grid.addLayoutComponent("", light.getButton());
+	public static Lights[][] addLights(JFrame frame, MainPresenter board, GridLayout grid, Panel panel, Contract.View view) {
+		Lights[][] lights = new Lights[board.boardSize()][board.boardSize()];
+		for (int i = 0; i< board.boardSize(); i++){
+			for (int j = 0; j<board.boardSize(); j++) {
+				if(board.haveLight(i, j)) {
+					Lights light = new Lights(true, i , j, view);
 					panel.add(light.getButton());
+					lights[i][j] = light;					
 				}
 				else {
-					Lights light = new Lights(false, i, j);				
+					Lights light = new Lights(false, i, j, view);				
 					panel.add(light.getButton());
-					//grid.addLayoutComponent("", light.getButton());
-				}
-				
+					lights[i][j] = light;
+				}				
 			}
 		}
+		return lights;
 	}
 
-	public static void boardDimension(JFrame frame, LightsOutGame board) {
-		
-		int size = board.getBoardSize();
-		System.out.println(size + "size");
-		
+	public static void boardDimension(JFrame frame, int size) {
+						
 		if (size >= 4) {
 			frame.setBounds(100, 100, 800, 700);
 		}
 		else {
-			throw new RuntimeException("Error while is building the frame dimensions");
+			throw new RuntimeException("Error while the frame dimensions was building ");
 		}
 	}
 
-	public static GridLayout setGridSize(GridLayout grid2, LightsOutGame board, Panel panel) {
+	public static GridLayout setGridSize(GridLayout grid2, int size) {
 		
-		return new GridLayout(board.getBoardSize(), board.getBoardSize(), 5, 5);
+		return new GridLayout(size,size, 5, 5);
 		
 	}
 
