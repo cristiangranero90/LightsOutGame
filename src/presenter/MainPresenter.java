@@ -1,10 +1,10 @@
 package presenter;
 
 import model.LightsOutGame;
+import presenter.Contract.Model;
 
 public class MainPresenter implements Contract.Presenter{
 	
-	//private LightsOutGame board;
 	private Contract.Model model;
 	private Contract.View view;
 	
@@ -64,7 +64,45 @@ public class MainPresenter implements Contract.Presenter{
 		model.oneMovement();
 	}
 
+	@Override
+	public void selectedCombo(String item) {
+		// TODO Auto-generated method stub
+		System.out.println(item);
+		switch (item){
+			case "Principiate": updateAll(4);
+			break;
+			
+			case "Medium": updateAll(5);
+			break;
+			
+			case "Advanced": updateAll(6);
+			break;
+			
+			case "Extreme": updateAll(8);
+			break;
+			
+			default: throw new RuntimeException("Level Invalid");	
+		
+		}
+	}
 
-	
+	private void updateAll(int i) {
+		
+		MainPresenter other = new MainPresenter(i, this.view);
+		try {
+			this.model = other.board();
+		} catch (Exception e){
+			System.out.println("Error creating a new board. ");
+		}
+		view.updateView();
+		
+		
+		
+	}
 
+	@Override
+	public void comunicateBuilding() {
+		// TODO Auto-generated method stub
+		model.setBuildBoard();
+	}
 }

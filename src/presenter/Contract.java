@@ -10,6 +10,9 @@ public interface Contract {
 		public void updateGrid();	
 		public void changeLight(int posX, int posY, boolean status);
 		public void updateMovements(int movements);
+		public void comboItem(String item);
+		public void updateView();
+		public void building();
 		
 	}
 	
@@ -22,6 +25,8 @@ public interface Contract {
 		public boolean haveLight(int posX, int posY);
 		public LightsOutGame board();
 		public void updateLights(int posX, int posY, boolean status);
+		public void selectedCombo(String item);
+		public void comunicateBuilding();
 				
 	}
 
@@ -33,5 +38,6 @@ public interface Contract {
 		public int getBoardSize();
 		public void setWinner(boolean winner);
 		public boolean isWinner();
+		public void setBuildBoard();
 	}
 }

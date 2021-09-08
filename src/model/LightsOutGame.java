@@ -10,15 +10,18 @@ public class LightsOutGame implements Contract.Model {
 	private int movements;
 	private boolean winner;	
 	private Contract.Presenter presenter;
+	private boolean buildBoard;
 
 	public LightsOutGame(int size, Contract.Presenter presenter) {
 		
 		this.presenter = presenter;
+		this.buildBoard = false;
 		checkSizeValue(size);
 		board = new boolean[size][size];
 		setMovements(0);
 		setWinner(false);
-		random();
+		//random();
+		
 	}
 	
 	//The best way for iterators
@@ -58,13 +61,16 @@ public class LightsOutGame implements Contract.Model {
 	//Privates methods for a simple checks and others functions
 	
 	private void random() {
-		
+		System.out.println(isBuildBoard());
+		//setBuildBoard();
+		System.out.println(isBuildBoard());
 		Random ran = new Random();
 		for(int i = 0; i<getBoardSize()-3; i++) {
 			int posX = ran.nextInt(getBoard().length);
 			int posY = ran.nextInt(getBoard().length);
 			generateLights(posX, posY);
-		}		
+		}
+		//setBuildBoard();
 	}
 
 	private void addLight(int row, int column) {
@@ -73,6 +79,7 @@ public class LightsOutGame implements Contract.Model {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
 				presenter.updateLights(row, column, false);
+				
 			}
 			else {
 				getBoard()[row][column] = true;
@@ -120,6 +127,16 @@ public class LightsOutGame implements Contract.Model {
 			throw new RuntimeException("The value of movements cannot be less than zero. ");
 		}
 		this.movements = movements;
+	}
+	
+
+	public boolean isBuildBoard() {
+		return buildBoard;
+	}
+
+	@Override
+	public void setBuildBoard() {
+		random();
 	}
 
 	@Override

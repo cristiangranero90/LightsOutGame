@@ -16,7 +16,7 @@ public class Lights {
 	private boolean status;
 	private int positionX;
 	private int positionY;
-	private Contract.Presenter presenter; //Interface
+	//private Contract.Presenter presenter; //Interface
 	
 	
 	public Lights(boolean status, int posX, int posY, Contract.View view){
@@ -26,7 +26,6 @@ public class Lights {
 		setStatus(status);
 		setPositionX(posX);
 		setPositionY(posY);		
-		//setColor();
 		addAction(view);
 	}
 	
