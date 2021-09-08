@@ -20,7 +20,7 @@ public class LightsOutGame implements Contract.Model {
 		board = new boolean[size][size];
 		setMovements(0);
 		setWinner(false);
-		//random();
+		random();
 		
 	}
 	
@@ -62,7 +62,7 @@ public class LightsOutGame implements Contract.Model {
 	
 	private void random() {
 		System.out.println(isBuildBoard());
-		//setBuildBoard();
+		setBuildBoard();
 		System.out.println(isBuildBoard());
 		Random ran = new Random();
 		for(int i = 0; i<getBoardSize()-3; i++) {
@@ -70,7 +70,7 @@ public class LightsOutGame implements Contract.Model {
 			int posY = ran.nextInt(getBoard().length);
 			generateLights(posX, posY);
 		}
-		//setBuildBoard();
+		setBuildBoard();
 	}
 
 	private void addLight(int row, int column) {
@@ -78,12 +78,18 @@ public class LightsOutGame implements Contract.Model {
 		if (!checkNumbers(row, column)) {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
-				presenter.updateLights(row, column, false);
+				if (!isBuildBoard()) {
+					presenter.updateLights(row, column, false);
+				}
+				
 				
 			}
 			else {
 				getBoard()[row][column] = true;
-				presenter.updateLights(row, column, true);
+				if (!isBuildBoard()) {
+					presenter.updateLights(row, column, true);
+				}
+				//presenter.updateLights(row, column, true);
 			}			
 		}
 		
@@ -136,7 +142,11 @@ public class LightsOutGame implements Contract.Model {
 
 	@Override
 	public void setBuildBoard() {
-		random();
+		if (this.buildBoard) {
+			this.buildBoard = false;
+		}else {
+			this.buildBoard = true;
+		}
 	}
 
 	@Override
