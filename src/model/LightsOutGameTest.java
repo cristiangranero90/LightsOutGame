@@ -2,12 +2,24 @@ package model;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import presenter.Contract;
+import presenter.Contract.Presenter;
 
 public class LightsOutGameTest {
 
+	@Before
+	public void setUp() {
+		public Contract.Presenter presenter;
+		presenter = null;
+	}
+	
 	@Test
 	public void testLightsOutGame() {
+		
 		LightsOutGame game = new LightsOutGame(5);
 		assertTrue(game.getBoard().length == 5);
 	}

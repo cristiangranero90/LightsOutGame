@@ -1,12 +1,9 @@
 package presenter;
 
-
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import javax.swing.JFrame;
-import model.LightsOutGame;
 import view.Lights;
 
 public class BoardTools { //It has only statics methods	

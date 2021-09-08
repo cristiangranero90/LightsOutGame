@@ -10,12 +10,15 @@ import presenter.MainPresenter;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+
+import jdk.internal.misc.FileSystemOption;
 
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EventObject;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -27,7 +30,7 @@ public class GameBoard implements Contract.View{
 	private MainPresenter presenter;
 	private Lights[][] lightsOnBoard;
 	private JLabel numberMovements;
-	private JButton reset;
+	private AbstractButton reset;
 	private JComboBox<String> comboBox;
 	String item;
 
@@ -71,6 +74,22 @@ public class GameBoard implements Contract.View{
 		numberMovements = new JLabel("0");
 		reset = new JButton();
 		presenter = new MainPresenter(4, this);
+		
+		//Button reset, action listener have some problems
+		reset.setText("RESET");
+		reset.setHorizontalAlignment(SwingConstants.CENTER);
+		reset.setBounds(590, 380, 100, 50);				
+		reset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {				
+				if(event.getSource().equals(reset)) {
+					System.out.println("INFO: Action performed.. RESET");
+					onButtonResetClicked();
+				}
+									
+			}			
+		});	
+		
 		//Updates view 				
 		updateView();  
 	}
@@ -118,19 +137,7 @@ public class GameBoard implements Contract.View{
 		//Add all elements to the main frame
 		frame.getContentPane().add(comboBox);
 		
-		//Button reset
-		reset.setText("RESET");
-		reset.setHorizontalAlignment(SwingConstants.CENTER);
-		reset.setBounds(590, 380, 100, 50);				
-		reset.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				onButtonResetClicked();
-			}
-			
-		});		
+		
 		frame.getContentPane().add(reset);
 	}
 	@Override

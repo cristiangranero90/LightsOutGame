@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-
 import presenter.Contract;
-import presenter.MainPresenter;
+
 
 public class Lights {
 	
@@ -94,8 +92,4 @@ public class Lights {
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
-	
-	
-	
-
 }

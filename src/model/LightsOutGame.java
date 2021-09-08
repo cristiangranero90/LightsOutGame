@@ -20,8 +20,7 @@ public class LightsOutGame implements Contract.Model {
 		board = new boolean[size][size];
 		setMovements(0);
 		setWinner(false);
-		random();
-		
+		random();		
 	}
 	
 	//The best way for iterators
@@ -54,12 +53,12 @@ public class LightsOutGame implements Contract.Model {
 		setMovements(getMovements()+1);
 		presenter.updateMovements(getMovements());
 	}
+	
 	public int getBoardSize() {
 		return getBoard().length;
 	}
 	
-	//Privates methods for a simple checks and others functions
-	
+	//Privates methods for a simple checks and others functions	
 	private void random() {
 		
 		setBuildBoard(); //This Flag is for not advice changes to the view

@@ -1,18 +1,16 @@
 package presenter;
 
 import model.LightsOutGame;
-import presenter.Contract.Model;
+
 
 public class MainPresenter implements Contract.Presenter{
 	
 	private Contract.Model model;
 	private Contract.View view;
 	
-	public MainPresenter(int sizeOfBoard, Contract.View view){
-		
+	public MainPresenter(int sizeOfBoard, Contract.View view){		
 		this.view = view;
 		model = new LightsOutGame(sizeOfBoard, this);
-		//board = new LightsOutGame(sizeOfBoard, this);		
 	}
 
 	@Override
@@ -66,8 +64,8 @@ public class MainPresenter implements Contract.Presenter{
 
 	@Override
 	public void selectedCombo(String item) {
-		// TODO Auto-generated method stub
-		System.out.println(item);
+		System.out.println("INFO: Selected item: "+ item);
+		
 		switch (item){
 			case "Beginner": updateAll(4);
 			break;
@@ -81,8 +79,7 @@ public class MainPresenter implements Contract.Presenter{
 			case "Extreme": updateAll(8);
 			break;
 			
-			default: throw new RuntimeException("Level Invalid");	
-		
+			default: throw new RuntimeException("Level Invalid");		
 		}
 	}
 
@@ -94,10 +91,7 @@ public class MainPresenter implements Contract.Presenter{
 		} catch (Exception e){
 			System.out.println("Error creating a new board. ");
 		}
-		view.updateView();
-		
-		
-		
+		view.updateView();		
 	}
 
 	@Override
