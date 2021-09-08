@@ -69,7 +69,7 @@ public class MainPresenter implements Contract.Presenter{
 		// TODO Auto-generated method stub
 		System.out.println(item);
 		switch (item){
-			case "Principiate": updateAll(4);
+			case "Beginner": updateAll(4);
 			break;
 			
 			case "Medium": updateAll(5);

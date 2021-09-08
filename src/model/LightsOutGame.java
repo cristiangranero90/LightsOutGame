@@ -61,9 +61,8 @@ public class LightsOutGame implements Contract.Model {
 	//Privates methods for a simple checks and others functions
 	
 	private void random() {
-		System.out.println(isBuildBoard());
-		setBuildBoard();
-		System.out.println(isBuildBoard());
+		
+		setBuildBoard(); //This Flag is for not advice changes to the view
 		Random ran = new Random();
 		for(int i = 0; i<getBoardSize()-3; i++) {
 			int posX = ran.nextInt(getBoard().length);
@@ -80,19 +79,15 @@ public class LightsOutGame implements Contract.Model {
 				getBoard()[row][column] = false;
 				if (!isBuildBoard()) {
 					presenter.updateLights(row, column, false);
-				}
-				
-				
+				}				
 			}
 			else {
 				getBoard()[row][column] = true;
 				if (!isBuildBoard()) {
 					presenter.updateLights(row, column, true);
-				}
-				//presenter.updateLights(row, column, true);
+				}				
 			}			
-		}
-		
+		}		
 	}
 
 	private boolean checkNumbers(int numberOne, int numberTwo) {		
@@ -139,6 +134,8 @@ public class LightsOutGame implements Contract.Model {
 	public boolean isBuildBoard() {
 		return buildBoard;
 	}
+	
+	//Some Contract methods
 
 	@Override
 	public void setBuildBoard() {

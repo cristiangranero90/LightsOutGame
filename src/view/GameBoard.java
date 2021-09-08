@@ -16,6 +16,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 public class GameBoard implements Contract.View{
@@ -26,6 +27,7 @@ public class GameBoard implements Contract.View{
 	private MainPresenter presenter;
 	private Lights[][] lightsOnBoard;
 	private JLabel numberMovements;
+	private JButton reset;
 	private JComboBox<String> comboBox;
 	String item;
 
@@ -33,7 +35,9 @@ public class GameBoard implements Contract.View{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+		/**This main run all the program, in MVP maybe is not a good practice.
+		 **Change it in a new Class, called Main (or whatever).
+		**/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
@@ -59,81 +63,95 @@ public class GameBoard implements Contract.View{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		comboBox = new JComboBox<>(new String[] {"Principiate","Medium", "Advanced", "Extreme"});
-		item = "Principiate";
+		//Basic constructors
+		comboBox = new JComboBox<>(new String[] {"Beginner","Medium", "Advanced", "Extreme"});
+		item = "Beginner";
 		frame = new JFrame();
 		panel = new Panel();
-		//String itemOfCombo = (String) comboBox.getSelectedItem();
-		//System.out.println(itemOfCombo);
-		
-		//Basic
+		numberMovements = new JLabel("0");
+		reset = new JButton();
 		presenter = new MainPresenter(4, this);
-		//lightsOnBoard = new Lights[10][10];
-		
-				
-		updateView();
-		//initializeComponents();	  
+		//Updates view 				
+		updateView();  
 	}
 	
 	public void initializeComponents() {
-		//Adding components		
+		//Adding components	
 		
-				JLabel tittle = new JLabel("Lights Out, the game");
-				tittle.setFont(new Font("Tahoma", Font.BOLD, 30));
-			    tittle.setHorizontalAlignment(SwingConstants.CENTER);
-			    tittle.setBounds(10, 20, 500, 60);		
-				frame.getContentPane().add(tittle);
+		//Tittle
+		JLabel tittle = new JLabel("Lights Out, the game");
+		tittle.setFont(new Font("Tahoma", Font.BOLD, 30));
+		tittle.setHorizontalAlignment(SwingConstants.CENTER);
+		tittle.setBounds(10, 20, 500, 60);		
+		frame.getContentPane().add(tittle);
+		
+		//Label movements
+		JLabel movements = new JLabel("Movements");
+		movements.setFont(new Font("Tahoma", Font.BOLD, 12));
+		movements.setHorizontalAlignment(SwingConstants.CENTER);
+		movements.setBounds(590, 100, 100, 220);		
+		frame.getContentPane().add(movements);
+		
+		//Label with number of movements
+		numberMovements.setText("0");
+		numberMovements.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numberMovements.setHorizontalAlignment(SwingConstants.CENTER);
+		numberMovements.setBounds(590, 100, 100, 280);		
+		frame.getContentPane().add(numberMovements);
+		
+		
 				
-				JLabel movements = new JLabel("Movements");
-				movements.setFont(new Font("Tahoma", Font.BOLD, 12));
-			    movements.setHorizontalAlignment(SwingConstants.CENTER);
-			    movements.setBounds(590, 100, 100, 220);		
-				frame.getContentPane().add(movements);
+		//Combo Box that show and changes the levels		
+		comboBox.setBounds(590, 300, 100, 20);
+		comboBox.setVisible(true);
 				
-				numberMovements = new JLabel("0");
-				numberMovements.setFont(new Font("Tahoma", Font.BOLD, 12));
-			    numberMovements.setHorizontalAlignment(SwingConstants.CENTER);
-			    numberMovements.setBounds(590, 100, 100, 280);		
-				frame.getContentPane().add(numberMovements);
-				
-				
-				comboBox.setBounds(590, 300, 100, 20);
-				comboBox.setVisible(true);
-				
-				ActionListener comboListener = new ActionListener() {
+		ActionListener comboListener = new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						String itemOfCombo = (String) comboBox.getSelectedItem();
-						comboItem(itemOfCombo);
-					}
-					
-				};
-				
-				comboBox.addActionListener(comboListener);
-				
-				
-				frame.getContentPane().add(comboBox);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String itemOfCombo = (String) comboBox.getSelectedItem();
+			comboItem(itemOfCombo);
+			}					
+		};
+		//ActionListener for the comboBox
+		comboBox.addActionListener(comboListener);
+		//Add all elements to the main frame
+		frame.getContentPane().add(comboBox);
+		
+		//Button reset
+		reset.setText("RESET");
+		reset.setHorizontalAlignment(SwingConstants.CENTER);
+		reset.setBounds(590, 380, 100, 50);				
+		reset.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				onButtonResetClicked();
+			}
+			
+		});		
+		frame.getContentPane().add(reset);
 	}
-
 	@Override
 	public void onButtonClicked(int posX, int posY) {
-		// TODO Auto-generated method stub
 		presenter.generateLights(posX, posY);
 		presenter.oneMovement();
 	}
 
 	@Override
-	public void onButtonResetClicked() {
+	public void onButtonResetClicked() {	
+		presenter.selectedCombo(getItem());
+	}
+
+	public String getItem() {
 		// TODO Auto-generated method stub
-		
+		return this.item;
 	}
 
 	@Override
 	public void updateGrid() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	@Override
 	public void changeLight(int posX, int posY, boolean status) {
@@ -145,63 +163,30 @@ public class GameBoard implements Contract.View{
 
 	@Override
 	public void updateMovements(int movement) {
-		// TODO Auto-generated method stub
 		numberMovements.setText(movement+"");
 	}
 
 	@Override
 	public void comboItem(String itemOfCombo) {
-		//System.out.println(itemOfCombo);
 		if(!itemOfCombo.equals(item)) {
-			item = itemOfCombo;
+			setItem(itemOfCombo);
+			numberMovements.setText("0");
 			presenter.selectedCombo(itemOfCombo);	
-		}
-			
+		}			
+	}
+
+	public void setItem(String itemOfCombo) {
+		this.item = itemOfCombo;		
 	}
 
 	@Override
 	public void updateView() {
-		
-		
-		
-		//System.out.println("Enter");
+		//Remove components in the frame and in the panel
 		frame.getContentPane().removeAll();
-		//frame.revalidate();
-	
-		panel.removeAll();
-		//panel.repaint();
-		//panel.validate();
+		panel.removeAll();	
 		
-		//frame.repaint();
-		
-		
-		
-		//frame.revalidate();
-		//frame.setBounds(0, 0, 0, 0);
-		//panel.setBounds(0, 0, 0, 0);
-		//frame.revalidate();
-		//panel.validate();
-		//System.out.println(frame.toString());
-		//panel.removeAll();
-		//panel.repaint();
-		//panel.revalidate();
-		//frame.removeAll();
-		//panel.removeAll();
-		//panel.rem
-		//panel.remove(frame);
-		//panel.repaint();
-		//panel.invalidate();
-		//panel.revalidate();
-		
-		
-		panel.setBounds(10, 100, 500, 500);
-		//panel.repaint();
-		//panel.validate();
-		
-		
-		
-		
-		//frame.setBounds(100, 100, 450, 300);
+		//Setting up basics
+		panel.setBounds(10, 100, 500, 500);		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
 			    
 		//Board Tools
@@ -210,13 +195,11 @@ public class GameBoard implements Contract.View{
 		lightsOnBoard = BoardTools.addLights(frame, presenter, grid, panel, this);
 		BoardTools.initializeFrame(frame, grid, panel);
 		
+		//Add all the components after the initialization
 		initializeComponents();
 		panel.validate();
 		frame.validate();
 		frame.getContentPane().add(panel);
-				//Set panel	 
-		
-		
 	}
 
 	@Override
