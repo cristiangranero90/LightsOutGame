@@ -45,7 +45,7 @@ public class LightsOutGame implements Contract.Model {
 		}		
 				
 	}
-	//Returns the light boolean of the specificated values 
+	//Returns the light boolean of the specified values 
 	public boolean giveMeLight(int row, int column) {
 		checkNumbers(row, column);
 		return getBoard()[row][column];
