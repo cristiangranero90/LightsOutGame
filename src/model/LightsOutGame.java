@@ -9,6 +9,7 @@ public class LightsOutGame implements Contract.Model {
 	private boolean board[][] ;
 	private int movements;
 	private boolean winner;	
+	private int winCount;
 	private Contract.Presenter presenter;
 	private boolean buildBoard;
 
@@ -20,6 +21,7 @@ public class LightsOutGame implements Contract.Model {
 		board = new boolean[size][size];
 		setMovements(0);
 		setWinner(false);
+		setWinCount(1);
 		random();		
 	}
 	
@@ -43,7 +45,7 @@ public class LightsOutGame implements Contract.Model {
 		}		
 				
 	}
-	//Returns the light boolean of the values specificated  
+	//Returns the light boolean of the specificated values 
 	public boolean giveMeLight(int row, int column) {
 		checkNumbers(row, column);
 		return getBoard()[row][column];
@@ -61,7 +63,7 @@ public class LightsOutGame implements Contract.Model {
 	//Privates methods for a simple checks and others functions	
 	private void random() {
 		
-		setBuildBoard(); //This Flag is for not advice changes to the view
+		setBuildBoard(); //Its a flag to not warn changes to the view (Like a Semaphore)
 		Random ran = new Random();
 		for(int i = 0; i<getBoardSize()-3; i++) {
 			int posX = ran.nextInt(getBoard().length);
@@ -76,16 +78,29 @@ public class LightsOutGame implements Contract.Model {
 		if (!checkNumbers(row, column)) {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
-				if (!isBuildBoard()) {
+				publishCount(-1);
+				if (!isBuildBoard()) {					
 					presenter.updateLights(row, column, false);
 				}				
 			}
 			else {
+				publishCount(1);
 				getBoard()[row][column] = true;
 				if (!isBuildBoard()) {
+					
 					presenter.updateLights(row, column, true);
 				}				
 			}			
+		}		
+	}
+
+	private void publishCount(int i) {
+		int boardComplete = getBoardSize() * getBoardSize();
+		System.out.println(getWinCount());
+		if (getWinCount() == boardComplete) {
+			System.out.println("Winner");
+		}else {
+			setWinCount(getWinCount() + i);	
 		}		
 	}
 
@@ -130,7 +145,7 @@ public class LightsOutGame implements Contract.Model {
 	}
 	
 
-	public boolean isBuildBoard() {
+	private boolean isBuildBoard() {
 		return buildBoard;
 	}
 	
@@ -149,6 +164,14 @@ public class LightsOutGame implements Contract.Model {
 	public LightsOutGame getAll() {
 		// TODO Auto-generated method stub
 		return this;
+	}
+
+	public int getWinCount() {
+		return winCount;
+	}
+
+	public void setWinCount(int winCount) {
+		this.winCount = winCount;
 	}
 	
 }

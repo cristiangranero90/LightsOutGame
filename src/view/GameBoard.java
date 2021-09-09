@@ -81,7 +81,7 @@ public class GameBoard implements Contract.View{
 		//if(e.getSource().equals(exit))
 		reset.setText("RESET");
 		reset.setHorizontalAlignment(SwingConstants.CENTER);
-		reset.setBounds(590, 380, 100, 50);				
+		reset.setBounds(590, 380, 100, 30);				
 		reset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {				
@@ -96,7 +96,7 @@ public class GameBoard implements Contract.View{
 		//Button close
 		exit.setText("EXIT");
 		exit.setHorizontalAlignment(SwingConstants.CENTER);
-		exit.setBounds(590, 480, 100, 50);				
+		exit.setBounds(590, 480, 100, 30);				
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
