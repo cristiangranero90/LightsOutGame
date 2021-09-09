@@ -88,13 +88,12 @@ public class LightsOutGame implements Contract.Model {
 	}
 
 	private void publishCount(int num) {
-		int boardComplete = getBoardSize() * getBoardSize();		
+		int boardComplete = getBoardSize() * getBoardSize();
+		setWinCount(getWinCount() + num);
 		if (getWinCount() == boardComplete) {
 			System.out.print(toString());
 			System.out.println("Winner");
-		}else {
-			setWinCount(getWinCount() + num);	
-		}		
+		}
 	}
 
 	private boolean checkNumbers(int numberOne, int numberTwo) {		
@@ -137,7 +136,15 @@ public class LightsOutGame implements Contract.Model {
 		}
 		this.movements = movements;
 	}
-	
+	private boolean allTrues() {
+		boolean acum = true;
+		for (int i = 0; i<getBoardSize(); i++) {
+			for (int j = 0; j<getBoardSize(); j++) {
+				acum = acum && giveMeLight(i,j);
+			}
+		}
+		return acum;
+	}
 
 	private boolean isBuildBoard() {
 		return buildBoard;
@@ -170,16 +177,16 @@ public class LightsOutGame implements Contract.Model {
 	
 	@Override
 	public String toString() {
-		StringBuilder table = new StringBuilder();
+		StringBuilder stringTable = new StringBuilder();
 		for (int i=0; i<getBoardSize(); i++) {
 			for (int j=0; j<getBoardSize(); j++) {
 				if(j == getBoardSize()) {
-					table.append(giveMeLight(i, j) + "\n");
+					stringTable.append(giveMeLight(i, j) + "\n");
 				}else {
-					table.append(giveMeLight(i,j) +" ");
+					stringTable.append(giveMeLight(i,j) +" ");
 				}				
 			}
 		}		
-		return table.toString();
+		return stringTable.toString();
 	}	
 }

@@ -11,14 +11,11 @@ import presenter.MainPresenter;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import jdk.internal.misc.FileSystemOption;
 
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.EventObject;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -218,6 +215,7 @@ public class GameBoard implements Contract.View{
 		BoardTools.boardDimension(frame, presenter.boardSize());		
 		lightsOnBoard = BoardTools.addLights(frame, presenter, grid, panel, this);
 		BoardTools.initializeFrame(frame, grid, panel);
+		
 		
 		//Add all the components after the initialization
 		initializeComponents();
