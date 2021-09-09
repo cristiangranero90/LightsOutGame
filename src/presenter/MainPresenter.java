@@ -33,7 +33,7 @@ public class MainPresenter implements Contract.Presenter{
 	}
 
 	@Override
-	public boolean haveLight(int x, int y) {
+	public boolean hasLight(int x, int y) {
 		return model.giveMeLight(x, y);
 	}
 

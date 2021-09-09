@@ -152,9 +152,9 @@ public class GameBoard implements Contract.View{
 		};
 		//ActionListener for the comboBox
 		comboBox.addActionListener(comboListener);
-		//Add all elements to the main frame
-		frame.getContentPane().add(comboBox);
 		
+		//Adding all the elements to the main frame
+		frame.getContentPane().add(comboBox);		
 		frame.getContentPane().add(exit);
 		frame.getContentPane().add(reset);
 	}
@@ -179,8 +179,7 @@ public class GameBoard implements Contract.View{
 		// TODO Auto-generated method stub		
 	}
 	@Override
-	public void changeLight(int posX, int posY, boolean status) {
-		
+	public void changeLight(int posX, int posY, boolean status) {		
 		if(lightsOnBoard != null) {
 			lightsOnBoard[posX][posY].setStatus(status);			
 		}		

@@ -16,9 +16,7 @@ public class Lights {
 	private boolean status;
 	private int positionX;
 	private int positionY;
-	//private Contract.Presenter presenter; //Interface
-	
-	
+		
 	public Lights(boolean status, int posX, int posY, Contract.View view){
 		button = new JButton();
 		button.setBounds(posX, posY, 1, 1);
@@ -69,8 +67,7 @@ public class Lights {
 	}
 
 
-	public void setStatus(boolean status) {
-		
+	public void setStatus(boolean status) {		
 		this.status = status;
 		setColor();
 	}

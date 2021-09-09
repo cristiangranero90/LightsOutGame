@@ -13,8 +13,7 @@ public class LightsOutGameTest {
 
 	@Before
 	public void setUp() {
-		public Contract.Presenter presenter;
-		presenter = null;
+		
 	}
 	
 	@Test
@@ -47,9 +46,7 @@ public class LightsOutGameTest {
 		LightsOutGame game = new LightsOutGame(5);
 		game.generateLights(1, 3);
 		assertTrue(game.giveMeLight(0, 3));		
-	}
-
-	
+	}	
 
 	@Test
 	public void testOneMovement() {

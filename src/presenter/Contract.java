@@ -12,8 +12,7 @@ public interface Contract {
 		public void updateMovements(int movements);
 		public void comboItem(String item);
 		public void updateView();
-		public void building();
-		
+		public void building();		
 	}
 	
 	interface Presenter{
@@ -22,23 +21,21 @@ public interface Contract {
 		public void oneMovement();
 		public void generateLights(int posX, int posY);
 		public int boardSize();
-		public boolean haveLight(int posX, int posY);
+		public boolean hasLight(int posX, int posY);
 		public LightsOutGame board();
 		public void updateLights(int posX, int posY, boolean status);
 		public void selectedCombo(String item);
-		public void comunicateBuilding();
-				
+		public void comunicateBuilding();				
 	}
 
-	interface Model{		
-		public LightsOutGame getAll();
+	interface Model{				
 		public boolean giveMeLight(int posX, int posY);
 		public void generateLights(int row, int column);
 		public void oneMovement();
 		public int getBoardSize();
 		public void setWinner(boolean winner);
 		public boolean isWinner();
-		public void setBuildBoard();
-		
+		public LightsOutGame getAll();
+		public void setBuildBoard();		
 	}
 }

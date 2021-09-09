@@ -63,7 +63,7 @@ public class LightsOutGame implements Contract.Model {
 	//Privates methods for a simple checks and others functions	
 	private void random() {
 		
-		setBuildBoard(); //Its a flag to not warn changes to the view (Like a Semaphore)
+		setBuildBoard(); //Its a flag to not warn changes to the view (Like a Mutex)
 		Random ran = new Random();
 		for(int i = 0; i<getBoardSize()-3; i++) {
 			int posX = ran.nextInt(getBoard().length);
@@ -78,16 +78,15 @@ public class LightsOutGame implements Contract.Model {
 		if (!checkNumbers(row, column)) {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
-				publishCount(-1);
-				if (!isBuildBoard()) {					
+				publishCount(-1);					
+				if (!isBuildBoard()) {						
 					presenter.updateLights(row, column, false);
 				}				
 			}
 			else {
 				publishCount(1);
-				getBoard()[row][column] = true;
-				if (!isBuildBoard()) {
-					
+				getBoard()[row][column] = true;				
+				if (!isBuildBoard()) {					
 					presenter.updateLights(row, column, true);
 				}				
 			}			
@@ -95,8 +94,7 @@ public class LightsOutGame implements Contract.Model {
 	}
 
 	private void publishCount(int i) {
-		int boardComplete = getBoardSize() * getBoardSize();
-		System.out.println(getWinCount());
+		int boardComplete = getBoardSize() * getBoardSize();		
 		if (getWinCount() == boardComplete) {
 			System.out.println("Winner");
 		}else {
@@ -106,7 +104,8 @@ public class LightsOutGame implements Contract.Model {
 
 	private boolean checkNumbers(int numberOne, int numberTwo) {		
 		return numberOne < 0 || numberTwo < 0 || 
-				numberOne > getBoardSize()-1 || numberTwo > getBoardSize()-1;
+				numberOne > getBoardSize() - 1|| 
+				numberTwo > getBoardSize() - 1;
 	}
 
 	private void checkSizeValue(int size) {
@@ -174,4 +173,18 @@ public class LightsOutGame implements Contract.Model {
 		this.winCount = winCount;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder table = new StringBuilder();
+		for (int i=0; i<getBoardSize(); i++) {
+			for (int j=0; j<getBoardSize(); j++) {
+				if(j == getBoardSize()) {
+					table.append(getBoard()[i][j] + "\n");
+				}else {
+					table.append(getBoard()[i][j]+" ");
+				}				
+			}
+		}		
+		return table.toString();
+	}	
 }

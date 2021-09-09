@@ -31,7 +31,7 @@ public class BoardTools { //It has only statics methods
 		Lights[][] lights = new Lights[board.boardSize()][board.boardSize()];
 		for (int i = 0; i< board.boardSize(); i++){
 			for (int j = 0; j<board.boardSize(); j++) {
-				if(board.haveLight(i, j)) {
+				if(board.hasLight(i, j)) {
 					Lights light = new Lights(true, i , j, view);
 					panel.add(light.getButton());
 					lights[i][j] = light;					
