@@ -39,5 +39,6 @@ public interface Contract {
 		public void setWinner(boolean winner);
 		public boolean isWinner();
 		public void setBuildBoard();
+		
 	}
 }

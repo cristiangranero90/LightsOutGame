@@ -30,7 +30,8 @@ public class GameBoard implements Contract.View{
 	private MainPresenter presenter;
 	private Lights[][] lightsOnBoard;
 	private JLabel numberMovements;
-	private AbstractButton reset;
+	private JButton reset;
+	private JButton exit;
 	private JComboBox<String> comboBox;
 	String item;
 
@@ -73,9 +74,11 @@ public class GameBoard implements Contract.View{
 		panel = new Panel();
 		numberMovements = new JLabel("0");
 		reset = new JButton();
+		exit = new JButton();
 		presenter = new MainPresenter(4, this);
 		
 		//Button reset, action listener have some problems
+		//if(e.getSource().equals(exit))
 		reset.setText("RESET");
 		reset.setHorizontalAlignment(SwingConstants.CENTER);
 		reset.setBounds(590, 380, 100, 50);				
@@ -83,10 +86,25 @@ public class GameBoard implements Contract.View{
 			@Override
 			public void actionPerformed(ActionEvent event) {				
 				if(event.getSource().equals(reset)) {
-					System.out.println("INFO: Action performed.. RESET");
+					System.out.println("INFO: Action performed... RESET");
 					onButtonResetClicked();
 				}
 									
+			}			
+		});	
+		
+		//Button close
+		exit.setText("EXIT");
+		exit.setHorizontalAlignment(SwingConstants.CENTER);
+		exit.setBounds(590, 480, 100, 50);				
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				if(e.getSource().equals(exit)) {
+					System.out.println("INFO: Action performed... EXIT");
+					//Delete all in the frame, and then close operations
+					frame.dispose();
+				}								
 			}			
 		});	
 		
@@ -137,7 +155,7 @@ public class GameBoard implements Contract.View{
 		//Add all elements to the main frame
 		frame.getContentPane().add(comboBox);
 		
-		
+		frame.getContentPane().add(exit);
 		frame.getContentPane().add(reset);
 	}
 	@Override
