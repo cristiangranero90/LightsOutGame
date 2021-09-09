@@ -26,25 +26,19 @@ public class LightsOutGame implements Contract.Model {
 	}
 	
 	//The best way for iterators
-	public void generateLights(int row, int column) {
+	public void generateLights(int row, int column) {		
 		
-		if(!checkNumbers(row, column)) {
 			addLight(row, column);			
-		}
-		if(!checkNumbers(row-1, column)) {
+		
 			addLight(row-1, column);
-		}
-		if(!checkNumbers(row+1, column)) {
+		
 			addLight(row+1, column);
-		}
-		if(!checkNumbers(row, column+1)) {
+		
 			addLight(row, column+1);
-		}
-		if(!checkNumbers(row, column-1)) {
-			addLight(row, column-1);
-		}		
-				
+		
+			addLight(row, column-1);					
 	}
+	
 	//Returns the light boolean of the specified values 
 	public boolean giveMeLight(int row, int column) {
 		checkNumbers(row, column);
@@ -73,8 +67,8 @@ public class LightsOutGame implements Contract.Model {
 		setBuildBoard();
 	}
 
-	private void addLight(int row, int column) {
-				
+	private void addLight(int row, int column) {				
+		
 		if (!checkNumbers(row, column)) {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
@@ -89,16 +83,17 @@ public class LightsOutGame implements Contract.Model {
 				if (!isBuildBoard()) {					
 					presenter.updateLights(row, column, true);
 				}				
-			}			
-		}		
+			}
+		}
 	}
 
-	private void publishCount(int i) {
+	private void publishCount(int num) {
 		int boardComplete = getBoardSize() * getBoardSize();		
 		if (getWinCount() == boardComplete) {
+			System.out.print(toString());
 			System.out.println("Winner");
 		}else {
-			setWinCount(getWinCount() + i);	
+			setWinCount(getWinCount() + num);	
 		}		
 	}
 
@@ -109,7 +104,7 @@ public class LightsOutGame implements Contract.Model {
 	}
 
 	private void checkSizeValue(int size) {
-		if(size < 4) {
+		if(size < 4 || size > 10) {
 			throw new IllegalArgumentException("The board size, it cant be less than four. ");
 		}		
 	}
@@ -179,9 +174,9 @@ public class LightsOutGame implements Contract.Model {
 		for (int i=0; i<getBoardSize(); i++) {
 			for (int j=0; j<getBoardSize(); j++) {
 				if(j == getBoardSize()) {
-					table.append(getBoard()[i][j] + "\n");
+					table.append(giveMeLight(i, j) + "\n");
 				}else {
-					table.append(getBoard()[i][j]+" ");
+					table.append(giveMeLight(i,j) +" ");
 				}				
 			}
 		}		

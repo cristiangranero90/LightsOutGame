@@ -76,14 +76,13 @@ public class MainPresenter implements Contract.Presenter{
 		}
 	}
 
-	private void updateAll(int i) {
-		
+	private void updateAll(int i) {		
 			
 		try {
 			MainPresenter other = new MainPresenter(i, this.view);	
 			this.model = other.board();
 		} catch (Exception e){
-			System.err.println("Error creating a new board. ");
+			System.err.println(e.toString());
 		}
 		view.updateView();		
 	}

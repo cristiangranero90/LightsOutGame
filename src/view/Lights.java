@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.border.Border;
 
 import presenter.Contract;
 
@@ -82,11 +81,9 @@ public class Lights {
 		this.positionX = positionX;
 	}
 
-
 	public int getPositionY() {
 		return positionY;
 	}
-
 
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
