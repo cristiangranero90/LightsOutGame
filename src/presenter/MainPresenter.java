@@ -69,6 +69,9 @@ public class MainPresenter implements Contract.Presenter{
 			case "Extreme": updateAll(8);
 			break;
 			
+			case "Very Sick": updateAll(10);
+			break;
+			
 			default: throw new RuntimeException("Level Invalid");		
 		}
 	}

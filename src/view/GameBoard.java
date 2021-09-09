@@ -68,7 +68,7 @@ public class GameBoard implements Contract.View{
 	 */
 	private void initialize() {
 		//Basic constructors
-		comboBox = new JComboBox<>(new String[] {"Beginner","Medium", "Advanced", "Extreme"});
+		comboBox = new JComboBox<>(new String[] {"Beginner","Medium", "Advanced", "Extreme", "Very Sick"});
 		item = "Beginner";
 		frame = new JFrame();
 		panel = new Panel();
