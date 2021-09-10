@@ -36,8 +36,8 @@ public class GameBoard implements Contract.View{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		/**This main run all the program, in MVP maybe is not a good practice.
-		 **Change it in a new Class, called Main (or whatever).
+		/**
+		 ** This main, runs all the program, in MVP maybe is not a good practice.
 		**/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -47,6 +47,7 @@ public class GameBoard implements Contract.View{
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
+					System.out.println("CRITICAL ERROR: " + e.toString());
 					e.printStackTrace();
 				}
 			}
@@ -73,6 +74,7 @@ public class GameBoard implements Contract.View{
 		reset = new JButton();
 		exit = new JButton();
 		presenter = new MainPresenter(4, this);
+		
 		
 		//Button reset, action listener have some problems
 		//if(e.getSource().equals(exit))
@@ -109,7 +111,7 @@ public class GameBoard implements Contract.View{
 		updateView();  
 	}
 	
-	public void initializeComponents() {
+		private void initializeComponents() {
 		//Adding components	
 		
 		//Tittle
@@ -150,6 +152,9 @@ public class GameBoard implements Contract.View{
 		//ActionListener for the comboBox
 		comboBox.addActionListener(comboListener);
 		
+		
+		
+		
 		//Adding all the elements to the main frame
 		frame.getContentPane().add(comboBox);		
 		frame.getContentPane().add(exit);
@@ -181,6 +186,7 @@ public class GameBoard implements Contract.View{
 			lightsOnBoard[posX][posY].setStatus(status);			
 		}		
 	}
+	
 
 	@Override
 	public void updateMovements(int movement) {
