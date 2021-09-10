@@ -47,8 +47,7 @@ public class LightsOutGame implements Contract.Model {
 		}
 		else {
 			throw new RuntimeException("Error with numbers. ");
-		}
-		
+		}		
 	}
 	
 	public void oneMovement() {

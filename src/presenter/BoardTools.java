@@ -50,7 +50,7 @@ public class BoardTools { //It has only statics methods
 	public static void boardDimension(JFrame frame, int size) {
 						
 		if (size >= 4) {
-			frame.setBounds(400, 200, 800, 700);
+			frame.setBounds(400, 200, 800, 650);
 		}
 		else {
 			throw new RuntimeException("Error while the frame dimensions was building ");
