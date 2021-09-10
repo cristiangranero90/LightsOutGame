@@ -53,14 +53,12 @@ public class GameBoard implements Contract.View{
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
 	public GameBoard() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -73,11 +71,8 @@ public class GameBoard implements Contract.View{
 		numberMovements = new JLabel("0");
 		reset = new JButton();
 		exit = new JButton();
-		presenter = new MainPresenter(4, this);
+		presenter = new MainPresenter(4, this);		
 		
-		
-		//Button reset, action listener have some problems
-		//if(e.getSource().equals(exit))
 		reset.setText("RESET");
 		reset.setHorizontalAlignment(SwingConstants.CENTER);
 		reset.setBounds(590, 380, 100, 30);				
@@ -87,11 +82,9 @@ public class GameBoard implements Contract.View{
 				if(event.getSource().equals(reset)) {
 					System.out.println("INFO: Action performed... RESET");
 					onButtonResetClicked();
-				}
-									
+				}									
 			}			
-		});	
-		
+		});		
 		//Button close
 		exit.setText("EXIT");
 		exit.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,8 +98,7 @@ public class GameBoard implements Contract.View{
 					frame.dispose();
 				}								
 			}			
-		});	
-		
+		});			
 		//Updates view 				
 		updateView();  
 	}
@@ -133,9 +125,7 @@ public class GameBoard implements Contract.View{
 		numberMovements.setFont(new Font("Tahoma", Font.BOLD, 12));
 		numberMovements.setHorizontalAlignment(SwingConstants.CENTER);
 		numberMovements.setBounds(590, 100, 100, 280);		
-		frame.getContentPane().add(numberMovements);
-		
-		
+		frame.getContentPane().add(numberMovements);		
 				
 		//Combo Box that show and changes the levels		
 		comboBox.setBounds(590, 300, 100, 20);
@@ -149,11 +139,9 @@ public class GameBoard implements Contract.View{
 			comboItem(itemOfCombo);
 			}					
 		};
+		
 		//ActionListener for the comboBox
-		comboBox.addActionListener(comboListener);
-		
-		
-		
+		comboBox.addActionListener(comboListener);	
 		
 		//Adding all the elements to the main frame
 		frame.getContentPane().add(comboBox);		
@@ -185,8 +173,7 @@ public class GameBoard implements Contract.View{
 		if(lightsOnBoard != null) {
 			lightsOnBoard[posX][posY].setStatus(status);			
 		}		
-	}
-	
+	}	
 
 	@Override
 	public void updateMovements(int movement) {
@@ -210,7 +197,8 @@ public class GameBoard implements Contract.View{
 	public void updateView() {
 		//Remove components in the frame and in the panel
 		frame.getContentPane().removeAll();
-		panel.removeAll();	
+		panel.removeAll();
+		lightsOnBoard = null;
 		
 		//Setting up basics
 		panel.setBounds(10, 100, 500, 500);		
@@ -220,8 +208,7 @@ public class GameBoard implements Contract.View{
 		grid = BoardTools.setGridSize(grid, presenter.boardSize());		
 		BoardTools.boardDimension(frame, presenter.boardSize());		
 		lightsOnBoard = BoardTools.addLights(frame, presenter, grid, panel, this);
-		BoardTools.initializeFrame(frame, grid, panel);
-		
+		BoardTools.initializeFrame(frame, grid, panel);		
 		
 		//Add all the components after the initialization
 		initializeComponents();
