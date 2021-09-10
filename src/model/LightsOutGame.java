@@ -21,9 +21,7 @@ public class LightsOutGame implements Contract.Model {
 		board = new boolean[size][size];
 		random();	
 		setMovements(0);
-		setWinner(false);
-		setWinCount(0);
-			
+		setWinner(false);			
 	}
 	
 	//The best way for iterators
@@ -78,15 +76,15 @@ public class LightsOutGame implements Contract.Model {
 			if (giveMeLight(row,column)) {
 				getBoard()[row][column] = false;
 				publishCount(-1);
-				System.out.println("Enter minus");
+				//System.out.println("Enter minus");
 				if (!isBuildBoard()) {					
 					presenter.updateLights(row, column, false);
 				}				
 			}
-			else {
-				System.out.println("Enter plus " + row + column);
+			else {				
+				getBoard()[row][column] = true;	
 				publishCount(1);
-				getBoard()[row][column] = true;				
+				//System.out.println("Enter plus " + row + column);
 				if (!isBuildBoard()) {					
 					presenter.updateLights(row, column, true);
 				}				
@@ -96,10 +94,10 @@ public class LightsOutGame implements Contract.Model {
 
 	private void publishCount(int num) {
 		int boardComplete = getBoardSize() * getBoardSize();
-		setWinCount(getWinCount() + num);
-		System.out.println(toString());
+		int count = getWinCount() + num;
+		setWinCount(count);		
 		if (getWinCount() == boardComplete && allTrues()) {
-			//System.out.print(toString());
+			setWinner(true);
 			System.out.println("Winner");
 		}
 	}
@@ -138,11 +136,11 @@ public class LightsOutGame implements Contract.Model {
 	}
 
 	private int getWinCount() {
-		return winCount;
+		return this.winCount;
 	}
 
-	private void setWinCount(int winCount) {
-		this.winCount = winCount;
+	private void setWinCount(int num) {
+		this.winCount = num;
 	}
 
 	@Override

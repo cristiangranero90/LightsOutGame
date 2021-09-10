@@ -21,8 +21,8 @@ import javax.swing.JComboBox;
 
 public class GameBoard implements Contract.View{
 
-	private  JFrame frame;
-	private  GridLayout grid;
+	private JFrame frame;
+	private GridLayout grid;
 	private Panel panel;
 	private MainPresenter presenter;
 	private Lights[][] lightsOnBoard;
