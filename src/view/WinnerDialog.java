@@ -57,7 +57,7 @@ public class WinnerDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Ok");
+				JButton okButton = new JButton("Continue");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						comunicateToView();

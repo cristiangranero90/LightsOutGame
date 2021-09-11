@@ -168,6 +168,29 @@ public class GameBoard implements Contract.View{
 		
 	}
 	@Override
+		public void updateView() {
+			//Remove components in the frame and in the panel
+			frame.getContentPane().removeAll();
+			panel.removeAll();
+			lightsOnBoard = null;
+			
+			//Setting up basics
+			panel.setBounds(10, 100, 500, 500);		
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
+				    
+			//Board Tools
+			grid = BoardTools.setGridSize(grid, presenter.boardSize());		
+			BoardTools.boardDimension(frame, presenter.boardSize());		
+			lightsOnBoard = BoardTools.addLights(frame, presenter, grid, panel, this);
+			BoardTools.initializeFrame(frame, grid, panel);		
+			
+			//Add all the components after the initialization
+			initializeComponents();
+			panel.validate();
+			frame.validate();
+			frame.getContentPane().add(panel);
+		}
+	@Override
 	public void onButtonClicked(int posX, int posY) {
 		presenter.generateLights(posX, posY);
 		presenter.oneMovement();
@@ -191,29 +214,6 @@ public class GameBoard implements Contract.View{
 	@Override
 	public void updateMovements(int movement) {
 		numberMovements.setText(movement+"");
-	}
-	@Override
-	public void updateView() {
-		//Remove components in the frame and in the panel
-		frame.getContentPane().removeAll();
-		panel.removeAll();
-		lightsOnBoard = null;
-		
-		//Setting up basics
-		panel.setBounds(10, 100, 500, 500);		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
-			    
-		//Board Tools
-		grid = BoardTools.setGridSize(grid, presenter.boardSize());		
-		BoardTools.boardDimension(frame, presenter.boardSize());		
-		lightsOnBoard = BoardTools.addLights(frame, presenter, grid, panel, this);
-		BoardTools.initializeFrame(frame, grid, panel);		
-		
-		//Add all the components after the initialization
-		initializeComponents();
-		panel.validate();
-		frame.validate();
-		frame.getContentPane().add(panel);
 	}
 	@Override
 	public void comboItem(String itemOfCombo) {
