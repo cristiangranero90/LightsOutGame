@@ -131,6 +131,13 @@ public class GameBoard implements Contract.View{
 		movements.setBounds(590, 100, 100, 220);		
 		frame.getContentPane().add(movements);
 		
+		//Levels Label
+		JLabel levels = new JLabel("Levels");
+		levels.setFont(new Font("Tahoma", Font.BOLD, 12));
+		levels.setHorizontalAlignment(SwingConstants.CENTER);
+		levels.setBounds(590, 170, 100, 220);		
+		frame.getContentPane().add(levels);
+		
 		//Label with number of movements
 		numberMovements.setText("0");
 		numberMovements.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -219,7 +226,7 @@ public class GameBoard implements Contract.View{
 	@Override
 	public void isWinner() {
 		winnerDialog.setBounds(frame.getX()*2, frame.getY()*2, 250, 200);
-		winnerDialog.setVisible(true);		
+		winnerDialog.setVisible(true);	
 		onButtonResetClicked();				
 	}
 	public void setItem(String itemOfCombo) {
