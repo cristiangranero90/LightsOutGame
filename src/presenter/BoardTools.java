@@ -1,12 +1,9 @@
 package presenter;
 
-
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import javax.swing.JFrame;
-import model.LightsOutGame;
 import view.Lights;
 
 public class BoardTools { //It has only statics methods	
@@ -33,7 +30,7 @@ public class BoardTools { //It has only statics methods
 		Lights[][] lights = new Lights[board.boardSize()][board.boardSize()];
 		for (int i = 0; i< board.boardSize(); i++){
 			for (int j = 0; j<board.boardSize(); j++) {
-				if(board.haveLight(i, j)) {
+				if(board.hasLight(i, j)) {
 					Lights light = new Lights(true, i , j, view);
 					panel.add(light.getButton());
 					lights[i][j] = light;					
@@ -51,7 +48,7 @@ public class BoardTools { //It has only statics methods
 	public static void boardDimension(JFrame frame, int size) {
 						
 		if (size >= 4) {
-			frame.setBounds(100, 100, 800, 700);
+			frame.setBounds(400, 200, 800, 650);
 		}
 		else {
 			throw new RuntimeException("Error while the frame dimensions was building ");
