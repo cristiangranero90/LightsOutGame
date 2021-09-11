@@ -12,19 +12,16 @@ public class LightsOutGame implements Contract.Model {
 	private int winCount;
 	private Contract.Presenter presenter;
 	private boolean buildBoard;
-	private boolean addLigthsWorking;
 
 	public LightsOutGame(int size, Contract.Presenter presenter) {
 		
 		this.presenter = presenter;
 		this.buildBoard = false;
-		this.addLigthsWorking = false;
 		checkSizeValue(size);
 		board = new boolean[size][size];
 		random();	
 		setMovements(0);
-		setWinner(false);
-		
+		setWinner(false);		
 	}
 	
 	//The best way for iterators
@@ -63,8 +60,7 @@ public class LightsOutGame implements Contract.Model {
 	}
 	
 	//Privates methods for a simple checks and others functions	
-	private void random() {
-		
+	private void random() {		
 		setBuildBoard(); //Its a flag to not warn changes to the view (Like a Mutex)
 		Random ran = new Random();
 		for(int i = 0; i<getBoardSize()-3; i++) {
@@ -102,7 +98,7 @@ public class LightsOutGame implements Contract.Model {
 		int boardComplete = getBoardSize() * getBoardSize();
 		if (getWinCount() == boardComplete && allTrues()) {
 			setWinner(true);
-			System.out.println("Winner");
+			comunicateWinner();
 		}
 	}
 
@@ -146,6 +142,20 @@ public class LightsOutGame implements Contract.Model {
 	}
 
 	@Override
+	public void comunicateWinner() {
+		presenter.winnerEncounter();		
+	}
+
+	//Some Contract methods
+	
+	@Override
+	public LightsOutGame getAll() {
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	//Some Contract methods
+
 	public void setBuildBoard() {
 		if (this.buildBoard) {
 			this.buildBoard = false;
@@ -183,25 +193,6 @@ public class LightsOutGame implements Contract.Model {
 	
 	
 	//Some Contract methods
-
-	@Override
-	public LightsOutGame getAll() {
-		// TODO Auto-generated method stub
-		return this;
-	}
-
-	public boolean isAddLigthsWorking() {
-		return this.addLigthsWorking;
-	}
-
-	public void setAddLigthsWorking() {
-		if (this.addLigthsWorking) {
-			this.addLigthsWorking = false;
-		}
-		else {
-			this.addLigthsWorking = true;
-		}
-	}
 
 	@Override
 	public String toString() {

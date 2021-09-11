@@ -23,36 +23,6 @@ public class MainPresenter implements Contract.Presenter{
 	}
 
 	@Override
-	public int boardSize() {
-		return model.getBoardSize();
-	}
-
-	@Override
-	public LightsOutGame board() {
-		return model.getAll();
-	}
-
-	@Override
-	public boolean hasLight(int x, int y) {
-		return model.giveMeLight(x, y);
-	}
-
-	@Override
-	public void updateLights(int posX, int posY, boolean status) {
-		view.changeLight(posX, posY, status);
-	}
-
-	@Override
-	public void updateMovements(int movements) {
-		view.updateMovements(movements);		
-	}
-
-	@Override
-	public void oneMovement() {
-		model.oneMovement();
-	}
-
-	@Override
 	public void selectedCombo(String item) {
 		System.out.println("INFO: Selected item: "+ item);
 		
@@ -76,6 +46,41 @@ public class MainPresenter implements Contract.Presenter{
 		}
 	}
 
+	@Override
+	public void winnerEncounter() {
+		view.isWinner();		
+	}
+
+	@Override
+	public boolean hasLight(int x, int y) {
+		return model.giveMeLight(x, y);
+	}
+
+	@Override
+	public void updateLights(int posX, int posY, boolean status) {
+		view.changeLight(posX, posY, status);
+	}
+
+	@Override
+	public void updateMovements(int movements) {
+		view.updateMovements(movements);		
+	}
+
+	@Override
+	public void oneMovement() {
+		model.oneMovement();
+	}
+
+	@Override
+	public int boardSize() {
+		return model.getBoardSize();
+	}
+
+	@Override
+	public LightsOutGame board() {
+		return model.getAll();
+	}
+
 	private void updateAll(int i) {		
 			
 		try {
@@ -87,8 +92,4 @@ public class MainPresenter implements Contract.Presenter{
 		view.updateView();		
 	}
 
-	@Override
-	public void comunicateBuilding() {
-		model.setBuildBoard();
-	}
 }

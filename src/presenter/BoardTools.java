@@ -27,7 +27,6 @@ public class BoardTools { //It has only statics methods
 	
 
 	public static Lights[][] addLights(JFrame frame, MainPresenter board, GridLayout grid, Panel panel, Contract.View view) {
-		//view.building();
 		Lights[][] lights = new Lights[board.boardSize()][board.boardSize()];
 		for (int i = 0; i< board.boardSize(); i++){
 			for (int j = 0; j<board.boardSize(); j++) {
@@ -43,7 +42,6 @@ public class BoardTools { //It has only statics methods
 				}				
 			}
 		}
-		//view.building();
 		return lights;
 	}
 

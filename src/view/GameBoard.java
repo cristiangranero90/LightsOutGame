@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -30,6 +31,7 @@ public class GameBoard implements Contract.View{
 	private JButton reset;
 	private JButton exit;
 	private JComboBox<String> comboBox;
+	private WinnerDialog winnerDialog;
 	String item;
 
 	/**
@@ -71,7 +73,15 @@ public class GameBoard implements Contract.View{
 		numberMovements = new JLabel("0");
 		reset = new JButton();
 		exit = new JButton();
-		presenter = new MainPresenter(4, this);		
+		presenter = new MainPresenter(4, this);
+		try {
+			winnerDialog = new WinnerDialog();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		winnerDialog.setVisible(false);
+		
 		
 		reset.setText("RESET");
 		reset.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,6 +105,7 @@ public class GameBoard implements Contract.View{
 				if(e.getSource().equals(exit)) {
 					System.out.println("INFO: Action performed... EXIT");
 					//Delete all in the frame, and then close operations
+					winnerDialog.dispose();
 					frame.dispose();
 				}								
 			}			
@@ -146,7 +157,8 @@ public class GameBoard implements Contract.View{
 		//Adding all the elements to the main frame
 		frame.getContentPane().add(comboBox);		
 		frame.getContentPane().add(exit);
-		frame.getContentPane().add(reset);
+		frame.getContentPane().add(reset);		
+		
 	}
 	@Override
 	public void onButtonClicked(int posX, int posY) {
@@ -159,11 +171,6 @@ public class GameBoard implements Contract.View{
 		presenter.selectedCombo(getItem());
 	}
 
-	public String getItem() {
-		// TODO Auto-generated method stub
-		return this.item;
-	}
-
 	@Override
 	public void updateGrid() {
 		// TODO Auto-generated method stub		
@@ -173,26 +180,11 @@ public class GameBoard implements Contract.View{
 		if(lightsOnBoard != null) {
 			lightsOnBoard[posX][posY].setStatus(status);			
 		}		
-	}	
-
+	}
 	@Override
 	public void updateMovements(int movement) {
 		numberMovements.setText(movement+"");
 	}
-
-	@Override
-	public void comboItem(String itemOfCombo) {
-		if(!itemOfCombo.equals(item)) {
-			setItem(itemOfCombo);
-			numberMovements.setText("0");
-			presenter.selectedCombo(itemOfCombo);	
-		}			
-	}
-
-	public void setItem(String itemOfCombo) {
-		this.item = itemOfCombo;		
-	}
-
 	@Override
 	public void updateView() {
 		//Remove components in the frame and in the panel
@@ -216,10 +208,26 @@ public class GameBoard implements Contract.View{
 		frame.validate();
 		frame.getContentPane().add(panel);
 	}
-
 	@Override
-	public void building() {
-		presenter.comunicateBuilding();		
+	public void comboItem(String itemOfCombo) {
+		if(!itemOfCombo.equals(item)) {
+			setItem(itemOfCombo);
+			numberMovements.setText("0");
+			presenter.selectedCombo(itemOfCombo);	
+		}			
+	}
+	@Override
+	public void isWinner() {
+		winnerDialog.setBounds(frame.getX()*2, frame.getY()*2, 250, 200);
+		winnerDialog.setVisible(true);		
+		onButtonResetClicked();				
+	}
+	public void setItem(String itemOfCombo) {
+		this.item = itemOfCombo;		
+	}
+	public String getItem() {
+		// TODO Auto-generated method stub
+		return this.item;
 	}
 
 }
