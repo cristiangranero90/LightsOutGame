@@ -128,7 +128,7 @@ public class GameBoard implements Contract.View{
 		JLabel movements = new JLabel("Movements");
 		movements.setFont(new Font("Tahoma", Font.BOLD, 12));
 		movements.setHorizontalAlignment(SwingConstants.CENTER);
-		movements.setBounds(590, 100, 100, 220);		
+		movements.setBounds(590, 50, 100, 220);		
 		frame.getContentPane().add(movements);
 		
 		//Levels Label
@@ -142,7 +142,7 @@ public class GameBoard implements Contract.View{
 		numberMovements.setText("0");
 		numberMovements.setFont(new Font("Tahoma", Font.BOLD, 12));
 		numberMovements.setHorizontalAlignment(SwingConstants.CENTER);
-		numberMovements.setBounds(590, 100, 100, 280);		
+		numberMovements.setBounds(590, 60, 100, 280);		
 		frame.getContentPane().add(numberMovements);		
 				
 		//Combo Box that show and changes the levels		
