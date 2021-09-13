@@ -97,7 +97,6 @@ public class LightsOutGame implements Contract.Model {
 
 	private void publishCount(int num) {		
 		setWinCount(getWinCount() + num);
-		System.out.println(getWinCount());
 	}
 	
 	private void viewWin() {
@@ -129,7 +128,7 @@ public class LightsOutGame implements Contract.Model {
 				falseContainer = falseContainer || giveMeLight(i,j);
 			}
 		}
-		System.out.println("All falses count: " + falseContainer);
+		//System.out.println("All falses count: " + falseContainer);
 		return !falseContainer;
 	}
 
