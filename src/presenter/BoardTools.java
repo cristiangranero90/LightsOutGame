@@ -2,7 +2,14 @@ package presenter;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Panel;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import view.Lights;
 
@@ -20,7 +27,16 @@ public class BoardTools { //It has only statics methods
 		
 		//Latest settings of the frame		
 		frame.setLayout(null);
-		frame.setTitle("Lights out, the game");
+		frame.setTitle("Lights out ");
+		
+		//Adds an Icon to the frame
+		try {
+			frame.setIconImage(ImageIO.read(new File("src/images/light-bulb-icon.png"))
+					.getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		frame.getContentPane().add(panel);
 		
 	}

@@ -17,6 +17,7 @@ public class LightsOutGame implements Contract.Model {
 		
 		this.presenter = presenter;
 		this.buildBoard = false;
+		this.winCount = size * size;
 		checkSizeValue(size);
 		board = new boolean[size][size];
 		random();	
@@ -62,41 +63,46 @@ public class LightsOutGame implements Contract.Model {
 	//Privates methods for a simple checks and others functions	
 	private void random() {		
 		setBuildBoard(); //Its a flag to not warn changes to the view (Like a Mutex)
+		
+		int posX = 0;
+		int posY = 0;
 		Random ran = new Random();
-		for(int i = 0; i<getBoardSize()-2; i++) {
-			int posX = ran.nextInt(getBoard().length);
-			int posY = ran.nextInt(getBoard().length);
-			generateLights(posX, posY);
+		for(int i = 0; i<getBoardSize(); i++) {
+			posX = ran.nextInt(getBoard().length);
+			posY = ran.nextInt(getBoard().length);
+			//generateLights(posX,posY);
+			addLight(posX, posY);
 		}
 		setBuildBoard();
 	}
 
 	private void addLight(int row, int column) {		
 		if (!checkNumbers(row, column)) {			
-			if (giveMeLight(row,column)) {				
-				getBoard()[row][column] = false;
-				publishCount(-1);
+			if (!giveMeLight(row,column)) {				
+				getBoard()[row][column] = true;
+				publishCount(1);
 				if (!isBuildBoard()) {					
-					presenter.updateLights(row, column, false);
+					presenter.updateLights(row, column, true);
 				}				
 			}
 			else {				
-				getBoard()[row][column] = true;	
-				publishCount(1);				
+				getBoard()[row][column] = false;	
+				publishCount(-1);				
 				if (!isBuildBoard()) {					
-					presenter.updateLights(row, column, true);
+					presenter.updateLights(row, column, false);
 				}				
 			}
 		}		
 	}
 
 	private void publishCount(int num) {		
-		setWinCount(getWinCount() + num);			
+		setWinCount(getWinCount() + num);
+		System.out.println(getWinCount());
 	}
 	
 	private void viewWin() {
 		int boardComplete = getBoardSize() * getBoardSize();
-		if (getWinCount() == boardComplete && allTrues()) {
+		if (getWinCount() == boardComplete && allFalses()) {
 			setWinner(true);
 			comunicateWinner();
 		}
@@ -116,15 +122,15 @@ public class LightsOutGame implements Contract.Model {
 		
 	//Getters and Setters
 	
-	private boolean allTrues() {
-		boolean trueContainer = true;
+	private boolean allFalses() {
+		boolean falseContainer = false;
 		for (int i = 0; i<getBoardSize(); i++) {
 			for (int j = 0; j<getBoardSize(); j++) {
-				trueContainer = trueContainer && giveMeLight(i,j);
+				falseContainer = falseContainer || giveMeLight(i,j);
 			}
 		}
-		System.out.println("All trues count: " + trueContainer);
-		return trueContainer;
+		System.out.println("All falses count: " + falseContainer);
+		return !falseContainer;
 	}
 
 	//Some Contract methods
