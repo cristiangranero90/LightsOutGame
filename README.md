@@ -1,4 +1,4 @@
 # LightsOutGame
 
- Lights Out is a simple and graphical game, using Java Swing and MVP pattern.
+ Lights Out is a simple graphical game, using Java Swing and MVP pattern.
  
