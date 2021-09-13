@@ -63,7 +63,7 @@ public class LightsOutGame implements Contract.Model {
 	private void random() {		
 		setBuildBoard(); //Its a flag to not warn changes to the view (Like a Mutex)
 		Random ran = new Random();
-		for(int i = 0; i<getBoardSize()-3; i++) {
+		for(int i = 0; i<getBoardSize()-2; i++) {
 			int posX = ran.nextInt(getBoard().length);
 			int posY = ran.nextInt(getBoard().length);
 			generateLights(posX, posY);
